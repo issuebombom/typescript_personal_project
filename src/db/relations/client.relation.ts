@@ -1,8 +1,8 @@
-import User from '../models/user';
+import Client from '../models/client';
 import Book from '../models/book';
 
 export default () => {
-  User.hasMany(Book, {
+  Client.hasMany(Book, {
     sourceKey: 'userId',
     foreignKey: 'userId',
   });

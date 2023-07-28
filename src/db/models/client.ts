@@ -1,9 +1,8 @@
 'use strict';
 import { Model, DataTypes } from 'sequelize';
 import sequelize from './';
-import Book from './book';
 
-interface UserAttributes {
+interface ClientAttributes {
   userId?: number;
   email: string;
   password: string;
@@ -13,7 +12,7 @@ interface UserAttributes {
   point?: number;
 }
 
-class User extends Model<UserAttributes> {
+class Client extends Model<ClientAttributes> {
   readonly userId!: number;
   email!: string;
   password!: string;
@@ -22,7 +21,7 @@ class User extends Model<UserAttributes> {
   introduction!: string;
   point!: number;
 }
-User.init(
+Client.init(
   {
     userId: {
       allowNull: false,
@@ -52,8 +51,8 @@ User.init(
   },
   {
     sequelize,
-    modelName: 'User',
+    modelName: 'Client',
   }
 );
 
-export default User;
+export default Client;

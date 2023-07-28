@@ -1,6 +1,6 @@
 import passport from 'passport';
 import local from './localStrategy';
-import { User } from '../db';
+import { Client } from '../db';
 
 export = () => {
   // req.login() 함수 실행 시 serializeUser가 실행됨
@@ -11,7 +11,7 @@ export = () => {
 
   // serializeUser()가 done하거나 passport.session()을 실행 시
   passport.deserializeUser((userId: number, done) => {
-    User.findOne({ where: { userId } })
+    Client.findOne({ where: { userId } })
       .then((user) => done(null, user)) // req.login으로 돌아가 유저 정보를 다음 미들웨어에 전달
       .catch((err) => done(err)); // 에러가 있으면 다시 req.login으로 이동(콜백)
   });

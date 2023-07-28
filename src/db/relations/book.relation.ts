@@ -1,11 +1,11 @@
 import Book from '../models/book';
-import User from '../models/user';
+import Client from '../models/client';
 import SeatPrice from '../models/seatprice';
 
 export default () => {
-  Book.belongsTo(User, {
+  Book.belongsTo(Client, {
     targetKey: 'userId',
-    foreignKey: 'UserId',
+    foreignKey: 'userId',
     onDelete: 'CASCADE',
   });
 
