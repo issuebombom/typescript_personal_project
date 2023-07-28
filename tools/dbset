@@ -1,0 +1,12 @@
+# sequelize init 또는 db:drop 하고 난 뒤에 해당 source를 실행하면 됩니다.
+npx sequelize-cli db:create --env development
+# 유저
+npx sequelize-cli model:generate --name User --attributes email:string,password:string,name:string,phone:string,introduction:string,point:integer
+# 공연
+npx sequelize-cli model:generate --name Show --attributes name:string,startDate:string,startHour:string,timeTaken:string,grade:string
+# 공연장
+npx sequelize-cli model:generate --name Place --attributes name:string,address:string,class:string,number:string
+# 예매현황
+npx sequelize-cli model:generate --name Book --attributes userId:integer,seatId:string,status:string
+# 좌석가격
+npx sequelize-cli model:generate --name SeatPrice --attributes showId:string,placeId:string,price:integer,status:string

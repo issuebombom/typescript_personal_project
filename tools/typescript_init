@@ -1,0 +1,28 @@
+# 글로벌 설치
+npm i typescript -g
+
+# Node 프로젝트 생성
+npm init -y
+
+# 타입스크립트 초기화 (tsconfig.json 생성)
+tsc --init --rootDir ./src --outDir ./dist --esModuleInterop --module commonjs --strict true --allowJS true --checkJS true
+
+mkdir src
+touch ./src/index.ts
+
+# 패키지 설치
+npm install sequelize-typescript sequelize-cli bcrypt cookie-parser dotenv express express-session jsonwebtoken mysql2 passport passport-local memorystore
+
+# "@types" 스코프의 타입 정의 파일을 한꺼번에 설치하기 위한 패키지
+npm install typesync --global
+
+# package.json에 @types/패키지이름 을 등록한다.
+npx typesync
+
+# @types/패키지이름을 설치한다.
+npm install
+
+# 시퀄라이즈 init
+cd src
+npx sequelize-cli init
+mv ./models/index.js ./models/index.ts
