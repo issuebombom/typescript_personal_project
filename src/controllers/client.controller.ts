@@ -12,15 +12,15 @@ class ClientController {
     try {
       // 유저 찾기
       const user = await this.clientService.getUser(Number(userId));
-      const me = req.user;
-      console.log(me)
+      const me = req.user as Client;
+
       if (!user) {
         return res.status(404).send({ message: '회원 정보가 없습니다.' });
       }
 
-      // if (me?. !== user?.userId) {
-      //   return
-      // }
+      if (me.userId !== user.userId) {
+        return res.status(403).send({ message: '타 유저 프로필 접근 권한 없음' });
+      }
       return res.send({ data: user });
     } catch (err) {
       if (err instanceof Error) {

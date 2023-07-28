@@ -60,7 +60,7 @@ class AuthController {
 
         //* done에서 user값을 제대로 가져온 경우(성공한 경우)
         // passport.serializeUser 함수로 이동
-        return req.login(user.userId, (loginError) => {
+        return req.login(user, (loginError) => {
           // deserializeUser 함수의 done이 실행되면
           // done(err) 발생 시
           if (loginError) {

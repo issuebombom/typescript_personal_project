@@ -4,9 +4,10 @@ import { Client } from '../db';
 
 export = () => {
   // req.login() 함수 실행 시 serializeUser가 실행됨
-  passport.serializeUser((userId, done) => {
+  passport.serializeUser((user, done) => {
     // req.session객체에 어떤 데이터를 저장할 지 선택한다.
-    done(null, userId); // deserializeUser로 이동
+    const client = user as Client
+    done(null, client.userId); // deserializeUser로 이동
   });
 
   // serializeUser()가 done하거나 passport.session()을 실행 시
