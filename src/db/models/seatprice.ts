@@ -1,9 +1,6 @@
 'use strict';
 import { Model, DataTypes } from 'sequelize';
 import sequelize from './';
-import Book from './book';
-import Place from './place';
-import Show from './show';
 
 interface SeatPriceAttributes {
   seatPriceId?: string;

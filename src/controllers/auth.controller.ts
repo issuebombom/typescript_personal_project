@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { User } from '../db';
+import { Client } from '../db';
 import passport from 'passport';
 
-import UserService from '../services/user.service';
+import ClientService from '../services/client.service';
 
 class AuthController {
-  userService = new UserService();
+  userService = new ClientService();
 
   signup = async (req: Request, res: Response) => {
-    const { email, password, name, phone, introduction }: User = req.body; // 프론트에서 보낸 폼데이터를 받는다.
+    const { email, password, name, phone, introduction }: Client = req.body; // 프론트에서 보낸 폼데이터를 받는다.
 
     try {
       // 기존에 이메일로 가입한 사람이 있나 검사 (중복 가입 방지)
@@ -22,7 +22,7 @@ class AuthController {
       const hash = bcrypt.hashSync(password, 12);
 
       // DB에 해당 회원정보 생성
-      await User.create({
+      await Client.create({
         email,
         password: hash,
         name,
@@ -47,7 +47,7 @@ class AuthController {
 
     try {
       // localstrategy.js 실행
-      passport.authenticate('local', (error: Error | null, user: false | User, info: Info) => {
+      passport.authenticate('local', (error: Error | null, user: false | Client, info: Info) => {
         //* localStrategy의 결과로 done 콜백함수가 실행된다.
         // done(err)가 발생한 경우
         if (error) {
@@ -60,7 +60,7 @@ class AuthController {
 
         //* done에서 user값을 제대로 가져온 경우(성공한 경우)
         // passport.serializeUser 함수로 이동
-        return req.login(user.userId, (loginError) => {
+        return req.login(user, (loginError) => {
           // deserializeUser 함수의 done이 실행되면
           // done(err) 발생 시
           if (loginError) {

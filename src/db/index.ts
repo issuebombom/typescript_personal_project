@@ -1,5 +1,5 @@
 import sequelize from './models';
-import User from './models/user';
+import Client from './models/client';
 import Show from './models/show';
 import Place from './models/place';
 import SeatPrice from './models/seatprice';
@@ -11,4 +11,4 @@ Object.values(relations).forEach((relationsFunction) => {
   relationsFunction();
 });
 
-export { sequelize, User, Show, Place, SeatPrice, Book };
+export { sequelize, Client, Show, Place, SeatPrice, Book };
