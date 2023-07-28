@@ -14,4 +14,4 @@ venv.bak/
 .vscode
 .DS_Store
 test.*
-src
+config.json
