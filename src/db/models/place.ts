@@ -6,16 +6,16 @@ interface PlaceAttributes {
   placeId?: string;
   name: string;
   address: string;
-  class: string;
-  number: string;
+  seatClassList: string;
+  seatNumberList: string;
 }
 
 class Place extends Model<PlaceAttributes> {
   readonly placeId!: string;
   name!: string;
   address!: string;
-  class!: string;
-  number!: string;
+  seatClassList!: string;
+  seatNumberList!: string;
 }
 Place.init(
   {
@@ -29,13 +29,13 @@ Place.init(
       type: DataTypes.STRING(50),
     },
     address: {
+      type: DataTypes.STRING(100),
+    },
+    seatClassList: {
       type: DataTypes.STRING(50),
     },
-    class: {
-      type: DataTypes.STRING(10),
-    },
-    number: {
-      type: DataTypes.STRING(10),
+    seatNumberList: {
+      type: DataTypes.STRING(50),
     },
   },
   {

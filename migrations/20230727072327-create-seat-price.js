@@ -15,6 +15,12 @@ module.exports = {
       placeId: {
         type: Sequelize.UUID,
       },
+      seatClass: {
+        type: Sequelize.STRING,
+      },
+      seatNumber: {
+        type: Sequelize.STRING,
+      },
       price: {
         type: Sequelize.INTEGER,
       },
