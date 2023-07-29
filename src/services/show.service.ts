@@ -13,7 +13,7 @@ class ShowService {
     return allShows;
   };
 
-  searchShows = async (keyword: string): Promise<Show[]> => {
+  searchShows = async (keyword: string | undefined): Promise<Show[]> => {
     const searchedShows = await Show.findAll({
       where: {
         name: { [Op.like]: `%${keyword}%` },

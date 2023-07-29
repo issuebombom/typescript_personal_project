@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Show } from '../db';
+import { Client, Show } from '../db';
 
 import ShowService from '../services/show.service';
 
@@ -22,13 +22,13 @@ class ShowController {
         return res.send({ data: show });
       } else if (keyword) {
         // 키워드 검색
-        const searchedShows = await this.showService.searchShows(keyword);
+        const searchedShow = await this.showService.searchShows(keyword);
 
-        if (searchedShows.length === 0) {
+        if (searchedShow.length === 0) {
           return res.send({ message: '검색 결과가 없음' });
         }
 
-        return res.send({ data: searchedShows });
+        return res.send({ data: searchedShow });
       } else {
         const shows = await this.showService.getAllShows();
 

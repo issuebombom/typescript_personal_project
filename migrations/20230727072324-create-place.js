@@ -15,11 +15,11 @@ module.exports = {
       address: {
         type: Sequelize.STRING(50),
       },
-      seatClassList: {
-        type: Sequelize.STRING(50),
+      class: {
+        type: Sequelize.STRING(10),
       },
-      seatNumberList: {
-        type: Sequelize.STRING(50),
+      number: {
+        type: Sequelize.STRING(10),
       },
     });
   },
