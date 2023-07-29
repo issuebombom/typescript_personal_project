@@ -6,8 +6,6 @@ interface SeatPriceAttributes {
   seatPriceId?: string;
   showId?: string;
   placeId?: string;
-  seatClass: string;
-  seatNumber: string;
   price: number;
   status?: string;
 }
@@ -16,8 +14,6 @@ class SeatPrice extends Model<SeatPriceAttributes> {
   readonly seatPriceId!: string;
   readonly showId!: string;
   readonly placeId!: string;
-  seatClass!: string;
-  seatNumber!: string;
   price!: number;
   status!: string;
 }
@@ -34,12 +30,6 @@ SeatPrice.init(
     },
     placeId: {
       type: DataTypes.UUID,
-    },
-    seatClass: {
-      type: DataTypes.STRING(10),
-    },
-    seatNumber: {
-      type: DataTypes.STRING(10),
     },
     price: {
       type: DataTypes.INTEGER,
