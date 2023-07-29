@@ -23,12 +23,12 @@ class PlaceService {
   };
 
   createPlace = async (placeInfo: Required<Place>): Promise<Place> => {
-    const { name, address, classes, numbers } = placeInfo;
+    const { name, address, seatClassList, seatNumber } = placeInfo;
     const createdPlace = await Place.create({
       name,
-      address, 
-      classes, 
-      numbers
+      address,
+      seatClassList,
+      seatNumber,
     });
     return createdPlace;
   };
