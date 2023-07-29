@@ -11,7 +11,7 @@ interface ShowAttributes {
   grade: string;
 }
 
-class Show extends Model {
+class Show extends Model<ShowAttributes> {
   readonly showId!: string;
   name!: string;
   startDate!: string;

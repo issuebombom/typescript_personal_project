@@ -20,6 +20,8 @@ class Client extends Model<ClientAttributes> {
   phone!: string;
   introduction!: string;
   point!: number;
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 Client.init(
   {
