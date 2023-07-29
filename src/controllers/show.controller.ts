@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Client } from '../db';
+import { Client, Show } from '../db';
 
 import ShowService from '../services/show.service';
 
@@ -7,8 +7,8 @@ class ShowController {
   showService = new ShowService();
 
   findShow = async (req: Request, res: Response) => {
-    const showId: string = req.params?.showId; // 프론트에서 보낸 폼데이터를 받는다.
-    const keyword = req.query?.keyword as string
+    const { showId }: Partial<Show> = req.params;
+    const keyword = req.query.keyword as string
 
     try {
       if (showId) {
@@ -37,6 +37,20 @@ class ShowController {
         }
         return res.send({ data: shows });
       }
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.name, ':', err.message);
+        console.error(err.stack);
+        return res.status(500).send({ message: `${err.message}` });
+      }
+    }
+  };
+
+  postShow = async (req: Request, res: Response) => {
+    try {
+      const showInfo: Required<Show> = req.body;
+      await this.showService.createShow(showInfo);
+      return res.send({ message: '공연 생성 완료' });
     } catch (err) {
       if (err instanceof Error) {
         console.error(err.name, ':', err.message);
