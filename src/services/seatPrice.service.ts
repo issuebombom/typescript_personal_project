@@ -7,7 +7,7 @@ interface ConditionAttributes {
 }
 
 class SeatPriceService {
-  getSeatPrice = async (
+  getSeatPrices = async (
     showId: string,
     status: string | undefined,
     seatClass: string | undefined
@@ -23,6 +23,15 @@ class SeatPriceService {
 
     const seats = await SeatPrice.findAll({ where: condition });
     return seats;
+  };
+
+  getSeatPrice = async (seatPriceId: string) => {
+    const seat = await SeatPrice.findByPk(seatPriceId);
+
+    if (!seat) {
+      throw new CustomError(404, '좌석 정보가 없습니다.');
+    }
+    return seat;
   };
 
   createSeatPrice = async (
