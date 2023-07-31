@@ -14,7 +14,7 @@ class SeatPriceController {
       const status = req.query.status as string | undefined;
       const seatClass = req.query.seatClass as string | undefined;
 
-      const seats = await this.seatPriceService.getSeatPrice(showId, status, seatClass);
+      const seats = await this.seatPriceService.getSeatPrices(showId, status, seatClass);
       return res.send({ data: seats });
     } catch (err) {
       if (err instanceof CustomError) {

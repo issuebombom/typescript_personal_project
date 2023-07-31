@@ -4,7 +4,7 @@ import CustomError from '../error';
 
 class PlaceService {
   // id와 email 기준 조회에 대한 처리
-  getPlace = async (placeId: string): Promise<Place | null> => {
+  getPlace = async (placeId: string): Promise<Place> => {
     const placeById = await Place.findByPk(placeId);
 
     if (!placeById) {

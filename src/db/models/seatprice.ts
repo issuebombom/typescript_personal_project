@@ -4,8 +4,8 @@ import sequelize from './';
 
 interface SeatPriceAttributes {
   seatPriceId?: string;
-  showId?: string;
-  placeId?: string;
+  showId: string;
+  placeId: string;
   seatClass: string;
   seatNumber: string;
   price: number;

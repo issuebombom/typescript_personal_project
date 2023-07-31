@@ -12,7 +12,7 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
       },
-      seatId: {
+      seatPriceId: {
         type: Sequelize.UUID,
       },
       status: {

@@ -7,6 +7,6 @@ npx sequelize-cli model:generate --name Show --attributes name:string,startDate:
 # 공연장
 npx sequelize-cli model:generate --name Place --attributes name:string,address:string,class:string,number:string
 # 예매현황
-npx sequelize-cli model:generate --name Book --attributes userId:integer,seatId:string,status:string
+npx sequelize-cli model:generate --name Book --attributes userId:integer,seatPlaceId:string,status:string
 # 좌석가격
 npx sequelize-cli model:generate --name SeatPrice --attributes showId:string,placeId:string,price:integer,status:string
