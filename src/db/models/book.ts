@@ -4,15 +4,15 @@ import sequelize from './';
 
 interface BookAttributes {
   bookId?: number;
-  userId?: number;
-  seatId?: string;
-  status: string;
+  userId: number;
+  seatPriceId: string;
+  status?: string;
 }
 
 class Book extends Model<BookAttributes> {
   readonly bookId!: number;
   readonly userId!: number;
-  readonly seatId!: string;
+  readonly seatPriceId!: string;
   status!: string;
   readonly createdAt!: Date;
   readonly updatedAt!: Date;
@@ -29,7 +29,7 @@ Book.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    seatId: {
+    seatPriceId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
