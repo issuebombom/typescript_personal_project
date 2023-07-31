@@ -8,7 +8,7 @@ import session from 'express-session';
 import passport from 'passport';
 
 import passportConfig from './passport';
-import { authRouter, userRouter, showRouter, placeRouter } from './routes';
+import { authRouter, userRouter, showRouter, placeRouter, seatPriceRouter } from './routes';
 
 const app: Express = express();
 const port: number = 3000;
@@ -33,7 +33,7 @@ app.use(passport.session()); // req.session 객체에 passport정보를 추가 �
 
 //* 라우터
 app.use('/auth', authRouter);
-app.use('/api', [userRouter, showRouter, placeRouter]);
+app.use('/api', [userRouter, showRouter, placeRouter, seatPriceRouter]);
 
 app.listen(port, () => {
   console.log(port, '포트로 접속하였습니다.');
