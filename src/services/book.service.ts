@@ -17,6 +17,11 @@ class BookService {
     let currPoint;
 
     try {
+      // 예약 가능한 상태인지 확인
+      if (seat.status !== 'available') {
+        throw new CustomError(400, '이미 예약된 좌석입니다.');
+      }
+
       if (user && seat && user.point >= seat.price) {
         currPoint = user.point - seat.price;
       } else {
