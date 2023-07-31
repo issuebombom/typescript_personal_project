@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import { Client } from '../db';
 import passport from 'passport';
-
+import CustomError from '../error';
 import ClientService from '../services/client.service';
 
 class AuthController {
@@ -13,29 +13,19 @@ class AuthController {
 
     try {
       // 기존에 이메일로 가입한 사람이 있나 검사 (중복 가입 방지)
-      const user = await this.userService.getUser(email);
-      if (user) {
-        return res.status(403).send({ message: '이미 가입한 회원' });
-      }
+      await this.userService.existsCheck(email);
 
       // 정상적인 회원가입 절차면 해시화
       const hash = bcrypt.hashSync(password, 12);
 
       // DB에 해당 회원정보 생성
-      await Client.create({
-        email,
-        password: hash,
-        name,
-        phone,
-        introduction,
-      });
+      await this.userService.createUser(email, hash, name, phone, introduction);
 
       return res.send({ message: '회원가입 완료' });
     } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.name, ':', err.message);
+      if (err instanceof CustomError) {
         console.error(err.stack);
-        return res.status(500).send({ message: `${err.message}` });
+        return res.status(err.status).send({ message: `${err.message}` });
       }
     }
   };
@@ -71,10 +61,9 @@ class AuthController {
         });
       })(req, res, next); //! 미들웨어 내의 미들웨어에는 콜백을 실행시키기위해 (req, res, next)를 붙인다.
     } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.name, ':', err.message);
+      if (err instanceof CustomError) {
         console.error(err.stack);
-        return res.status(500).send({ message: `${err.message}` });
+        return res.status(err.status).send({ message: `${err.message}` });
       }
     }
   };
@@ -90,10 +79,9 @@ class AuthController {
       }); // 로그인인증 수단으로 사용한 세션쿠키를 지우고 파괴
       res.send({ message: '로그아웃 완료' });
     } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.name, ':', err.message);
+      if (err instanceof CustomError) {
         console.error(err.stack);
-        return res.status(500).send({ message: `${err.message}` });
+        return res.status(err.status).send({ message: `${err.message}` });
       }
     }
   };

@@ -27,7 +27,6 @@ class PlaceController {
       }
     } catch (err) {
       if (err instanceof CustomError) {
-        console.error(err.name, ':', err.message);
         console.error(err.stack);
         return res.status(err.status).send({ message: `${err.message}` });
       }
@@ -40,10 +39,9 @@ class PlaceController {
       await this.placeService.createPlace(placeInfo);
       return res.send({ message: '공연 생성 완료' });
     } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.name, ':', err.message);
+      if (err instanceof CustomError) {
         console.error(err.stack);
-        return res.status(500).send({ message: `${err.message}` });
+        return res.status(err.status).send({ message: `${err.message}` });
       }
     }
   };

@@ -18,7 +18,6 @@ class SeatPriceController {
       return res.send({ data: seats });
     } catch (err) {
       if (err instanceof CustomError) {
-        console.error(err.name, ':', err.message);
         console.error(err.stack);
         return res.status(500).send({ message: `${err.message}` });
       }
@@ -43,7 +42,6 @@ class SeatPriceController {
       }
     } catch (err) {
       if (err instanceof CustomError) {
-        console.error(err.name, ':', err.message);
         console.error(err.stack);
         return res.status(500).send({ message: `${err.message}` });
       }

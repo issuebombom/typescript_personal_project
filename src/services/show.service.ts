@@ -1,10 +1,15 @@
 import { Op } from 'sequelize';
 import { Show } from '../db';
+import CustomError from '../error';
 
 class ShowService {
   // id와 email 기준 조회에 대한 처리
   getShow = async (showId: string): Promise<Show | null> => {
     const showById = await Show.findByPk(showId);
+
+    if (!showById) {
+      throw new CustomError(404, '공연 정보가 없습니다.');
+    }
     return showById;
   };
 
@@ -31,6 +36,7 @@ class ShowService {
       timeTaken,
       grade,
     });
+
     return createdShow;
   };
 }
