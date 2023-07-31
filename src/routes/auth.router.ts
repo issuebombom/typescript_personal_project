@@ -10,9 +10,6 @@ const authController = new AuthController();
 // 사용자 미들웨어 isNotLoggedIn을 통과해야 async (req, res, next) => 미들웨어 실행
 router.post('/join', isNotLoggedIn, authController.signup);
 
-interface Info {
-  message: string;
-}
 //* 로그인 요청
 router.post('/login', isNotLoggedIn, authController.login);
 

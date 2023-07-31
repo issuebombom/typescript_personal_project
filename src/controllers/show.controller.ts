@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Client, Show } from '../db';
+import { Show } from '../db';
 
 import ShowService from '../services/show.service';
 
