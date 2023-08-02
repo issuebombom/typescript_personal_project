@@ -61,9 +61,9 @@ class AuthController {
         });
       })(req, res, next); //! 미들웨어 내의 미들웨어에는 콜백을 실행시키기위해 (req, res, next)를 붙인다.
     } catch (err) {
-      if (err instanceof CustomError) {
+      if (err instanceof Error) {
         console.error(err.stack);
-        return res.status(err.status).send({ message: `${err.message}` });
+        return res.send({ message: `${err.message}` });
       }
     }
   };
@@ -79,9 +79,9 @@ class AuthController {
       }); // 로그인인증 수단으로 사용한 세션쿠키를 지우고 파괴
       res.send({ message: '로그아웃 완료' });
     } catch (err) {
-      if (err instanceof CustomError) {
+      if (err instanceof Error) {
         console.error(err.stack);
-        return res.status(err.status).send({ message: `${err.message}` });
+        return res.send({ message: `${err.message}` });
       }
     }
   };
