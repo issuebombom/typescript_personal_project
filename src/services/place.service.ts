@@ -35,6 +35,12 @@ class PlaceService {
     return searchedPlaces;
   };
 
+  isPermitted = (isAdmin: boolean): void => {
+    if (!isAdmin) {
+      throw new CustomError(403, '접근 권한 없음');
+    }
+  };
+
   createPlace = async (placeInfo: Required<Place>): Promise<Place> => {
     const { name, address, seatClassList, seatNumberList } = placeInfo;
 

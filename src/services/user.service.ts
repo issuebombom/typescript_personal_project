@@ -23,7 +23,7 @@ class UserService {
     return userById ?? userByEmail;
   };
 
-  isPermitted = async (userId: number, targetUserId: number) => {
+  isPermitted = (userId: number, targetUserId: number) => {
     if (userId !== targetUserId) {
       throw new CustomError(403, '타 유저 프로필 접근 권한 없음');
     }
