@@ -6,6 +6,19 @@ import { User } from '../db';
 class BookController {
   bookService = new BookService();
 
+  getMyBooks = async (req: Request, res: Response) => {
+    try {
+      const { userId } = req.user as User;
+      const books = await this.bookService.getBooks(userId);
+      return res.send({ data: books });
+    } catch (err) {
+      if (err instanceof CustomError) {
+        console.error(err.stack);
+        return res.status(err.status).send({ message: `${err.message}` });
+      }
+    }
+  };
+
   bookTicket = async (req: Request, res: Response) => {
     try {
       const { userId } = req.user as User;

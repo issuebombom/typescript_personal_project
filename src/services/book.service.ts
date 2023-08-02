@@ -1,11 +1,19 @@
 import { Transaction } from 'sequelize';
-import { Book, User, SeatPrice, sequelize } from '../db';
+import { Book, User, Show, Place, SeatPrice, sequelize } from '../db';
 import UserService from './user.service';
 import CustomError from '../error';
 import SeatPriceService from './seatPrice.service';
 class BookService {
   userService = new UserService();
   seatPriceService = new SeatPriceService();
+
+  getBooks = async (userId: number) => {
+    const booksById = await Book.findAll({
+      include: [{ model: SeatPrice, include: [Show, Place] }],
+      where: { userId },
+    });
+    return booksById;
+  };
 
   createBook = async (userId: number, seatPriceId: string) => {
     const t = await sequelize.transaction({
