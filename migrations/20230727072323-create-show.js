@@ -12,6 +12,12 @@ module.exports = {
       name: {
         type: Sequelize.STRING(50),
       },
+      description: {
+        type: Sequelize.STRING(255),
+      },
+      posterImg: {
+        type: Sequelize.STRING(255),
+      },
       startDate: {
         type: Sequelize.STRING(50),
       },

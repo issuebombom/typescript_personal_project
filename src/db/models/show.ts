@@ -5,6 +5,8 @@ import sequelize from './';
 interface ShowAttributes {
   showId?: string;
   name: string;
+  description: string;
+  posterImg: string;
   startDate: string;
   startHour: string;
   timeTaken: string;
@@ -14,6 +16,8 @@ interface ShowAttributes {
 class Show extends Model<ShowAttributes> {
   readonly showId!: string;
   name!: string;
+  description!: string;
+  posterImg!: string;
   startDate!: string;
   startHour!: string;
   timeTaken!: string;
@@ -29,6 +33,12 @@ Show.init(
     },
     name: {
       type: DataTypes.STRING(50),
+    },
+    description: {
+      type: DataTypes.STRING(255),
+    },
+    posterImg: {
+      type: DataTypes.STRING(255),
     },
     startDate: {
       type: DataTypes.STRING(50),

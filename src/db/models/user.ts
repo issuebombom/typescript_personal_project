@@ -10,6 +10,7 @@ interface UserAttributes {
   phone: string;
   introduction: string;
   point?: number;
+  isAdmin?: boolean;
 }
 
 class User extends Model<UserAttributes> {
@@ -20,6 +21,7 @@ class User extends Model<UserAttributes> {
   phone!: string;
   introduction!: string;
   point!: number;
+  isAdmin!: boolean;
   readonly createdAt!: Date;
   readonly updatedAt!: Date;
 }
@@ -49,6 +51,10 @@ User.init(
     point: {
       type: DataTypes.INTEGER,
       defaultValue: 1000000,
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {
