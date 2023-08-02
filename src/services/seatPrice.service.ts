@@ -34,6 +34,12 @@ class SeatPriceService {
     return seat;
   };
 
+  isPermitted = (isAdmin: boolean): void => {
+    if (!isAdmin) {
+      throw new CustomError(403, '접근 권한 없음');
+    }
+  };
+
   createSeatPrice = async (
     showId: string,
     placeId: string,

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Place } from '../db';
+import { Place, User } from '../db';
 
 import PlaceService from '../services/place.service';
 import CustomError from '../error';
@@ -35,7 +35,11 @@ class PlaceController {
 
   postPlace = async (req: Request, res: Response) => {
     try {
+      const { isAdmin } = req.user as User;
       const placeInfo: Required<Place> = req.body;
+
+      // 어드민 유저 검증
+      this.placeService.isPermitted(isAdmin);
       await this.placeService.createPlace(placeInfo);
       return res.send({ message: '공연 생성 완료' });
     } catch (err) {

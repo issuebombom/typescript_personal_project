@@ -27,10 +27,18 @@ class ShowService {
     return searchedShows;
   };
 
+  isPermitted = (isAdmin: boolean): void => {
+    if (!isAdmin) {
+      throw new CustomError(403, '접근 권한 없음');
+    }
+  };
+
   createShow = async (showInfo: Required<Show>): Promise<Show> => {
-    const { name, startDate, startHour, timeTaken, grade } = showInfo;
+    const { name, description, posterImg, startDate, startHour, timeTaken, grade } = showInfo;
     const createdShow = await Show.create({
       name,
+      description,
+      posterImg,
       startDate,
       startHour,
       timeTaken,
