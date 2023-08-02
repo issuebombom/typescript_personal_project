@@ -34,6 +34,8 @@ venv.bak/
 # etc.
 .vscode
 .DS_Store
-test.*"
+test.*
+config.js
+"
 
 echo "$git_ignore" > .gitignore
