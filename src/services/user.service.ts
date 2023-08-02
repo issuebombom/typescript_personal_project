@@ -1,11 +1,11 @@
-import { Client } from '../db';
+import { User } from '../db';
 import CustomError from '../error';
 
-class ClientService {
+class UserService {
   // id와 email 기준 조회에 대한 처리
   existsCheck = async (searchKeyword: number | string) => {
-    const userById = await Client.findByPk(searchKeyword);
-    const userByEmail = await Client.findOne({ where: { email: searchKeyword } });
+    const userById = await User.findByPk(searchKeyword);
+    const userByEmail = await User.findOne({ where: { email: searchKeyword } });
 
     if (userById || userByEmail) {
       throw new CustomError(400, '이미 가입한 회원입니다.');
@@ -13,8 +13,8 @@ class ClientService {
   };
 
   getUser = async (searchKeyword: number | string) => {
-    const userById = await Client.findByPk(searchKeyword);
-    const userByEmail = await Client.findOne({ where: { email: searchKeyword } });
+    const userById = await User.findByPk(searchKeyword);
+    const userByEmail = await User.findOne({ where: { email: searchKeyword } });
 
     if (!userById && !userByEmail) {
       throw new CustomError(404, '회원 정보가 없습니다.');
@@ -41,7 +41,7 @@ class ClientService {
     validation 적용 필요
     */
 
-    const createdUser = await Client.create({
+    const createdUser = await User.create({
       email,
       password,
       name,
@@ -52,4 +52,4 @@ class ClientService {
   };
 }
 
-export default ClientService;
+export default UserService;

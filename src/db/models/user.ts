@@ -2,7 +2,7 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from './';
 
-interface ClientAttributes {
+interface UserAttributes {
   userId?: number;
   email: string;
   password: string;
@@ -12,7 +12,7 @@ interface ClientAttributes {
   point?: number;
 }
 
-class Client extends Model<ClientAttributes> {
+class User extends Model<UserAttributes> {
   readonly userId!: number;
   email!: string;
   password!: string;
@@ -23,7 +23,7 @@ class Client extends Model<ClientAttributes> {
   readonly createdAt!: Date;
   readonly updatedAt!: Date;
 }
-Client.init(
+User.init(
   {
     userId: {
       allowNull: false,
@@ -53,8 +53,8 @@ Client.init(
   },
   {
     sequelize,
-    modelName: 'Client',
+    modelName: 'User',
   }
 );
 
-export default Client;
+export default User;

@@ -1,7 +1,7 @@
 import passport from 'passport';
 import passportLocal from 'passport-local'
 import bcrypt from 'bcrypt'
-import { Client } from '../db';
+import { User } from '../db';
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -17,7 +17,7 @@ export = () => {
       async (email, password, done) => {
         // done()의 첫번째 함수는 에러용으로 처리함
         try {
-          const foundUser = await Client.findOne({ where: { email } });
+          const foundUser = await User.findOne({ where: { email } });
           if (foundUser) {
             const result = bcrypt.compareSync(password, foundUser.password);
             if (result) {
