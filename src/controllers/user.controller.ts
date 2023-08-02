@@ -14,7 +14,7 @@ class UserController {
       const me = req.user as User;
 
       // 본인 프로필을 조회하는 케이스인지 검증
-      const isApproval: boolean = await this.userService.isPermitted(Number(userId), me.userId);
+      const isApproval: boolean = this.userService.isPermitted(Number(userId), me.userId);
       if (isApproval) {
         // 유저 찾기
         const user = await this.userService.getUser(Number(userId));

@@ -21,11 +21,11 @@ import {
 
 const app: Express = express();
 const port: number = 3000;
-const maxAge = 1 * 60 * 1000; // 1분
+const maxAge = 24 * 60 * 60 * 1000; // 하루
 passportConfig(); // 패스포트 설정
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ limit: '5mb', extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET_KEY));
 app.use(
   session({
