@@ -6,8 +6,9 @@ export = () => {
   // req.login() 함수 실행 시 serializeUser가 실행됨
   passport.serializeUser((user, done) => {
     // req.session객체에 어떤 데이터를 저장할 지 선택한다.
-    user = user as User
-    done(null, user.userId); // deserializeUser로 이동
+    if (user instanceof User) {
+      done(null, user.userId); // deserializeUser로 이동
+    }
   });
 
   // serializeUser()가 done하거나 passport.session()을 실행 시

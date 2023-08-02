@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from 'passport';
+import memorystore from 'memorystore';
+const MemoryStore = memorystore(session);
 
 import passportConfig from './passport';
 import {
@@ -19,6 +21,7 @@ import {
 
 const app: Express = express();
 const port: number = 3000;
+const maxAge = 1 * 60 * 1000; // 1분
 passportConfig(); // 패스포트 설정
 
 app.use(bodyParser.json());
@@ -28,10 +31,12 @@ app.use(
   session({
     resave: false,
     saveUninitialized: false,
+    store: new MemoryStore({ checkPeriod: maxAge }),
     secret: process.env.COOKIE_SECRET_KEY as string,
     cookie: {
       httpOnly: true,
       secure: false,
+      maxAge: maxAge,
     },
   })
 );

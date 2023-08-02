@@ -1,10 +1,10 @@
 import { Transaction } from 'sequelize';
 import { Book, User, SeatPrice, sequelize } from '../db';
-import User from './user.service';
+import UserService from './user.service';
 import CustomError from '../error';
 import SeatPriceService from './seatPrice.service';
 class BookService {
-  userService = new User();
+  userService = new UserService();
   seatPriceService = new SeatPriceService();
 
   createBook = async (userId: number, seatPriceId: string) => {

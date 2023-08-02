@@ -1,11 +1,11 @@
-import clientRelation from './client.relation';
+import userRelation from './user.relation';
 import bookRelation from './book.relation';
 import placeRelation from './place.relation';
 import seatpriceRelation from './seatprice.relation';
 import showRelation from './show.relation';
 
 export default {
-  clientRelation,
+  userRelation,
   bookRelation,
   placeRelation,
   seatpriceRelation,
